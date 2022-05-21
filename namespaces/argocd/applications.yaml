@@ -26,7 +26,6 @@ spec:
   source:
     chart: traefik-mesh
     repoURL: https://helm.traefik.io/mesh
-    targetRevision: 1.4.5
     helm:
       releaseName: traefik-mesh
   destination:
