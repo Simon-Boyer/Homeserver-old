@@ -19,24 +19,6 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
-spec:
-  project: public
-  destination:
-    namespace: linkerd
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: 'https://github.com/Simon-Boyer/homeserver'
-    targetRevision: main
-    path: namespaces/linkerd
-  syncPolicy:
-    automated:
-      selfHeal: true
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
   name: traefik-mesh
   namespace: traefik-mesh
 spec:
