@@ -5,6 +5,7 @@ metadata:
 spec:
   sourceRepos:
   - 'https://github.com/Simon-Boyer/homeserver'
+  - 'https://helm.traefik.io/mesh'
   destinations:
   - namespace: '*'
     server: 'https://kubernetes.default.svc'
