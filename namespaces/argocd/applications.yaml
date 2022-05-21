@@ -8,7 +8,7 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   source:
-    repoURL: 'https://github.com/Simon-Boyer/homeserver-config'
+    repoURL: 'https://github.com/Simon-Boyer/homeserver'
     targetRevision: main
     path: namespaces/argocd
   syncPolicy:
