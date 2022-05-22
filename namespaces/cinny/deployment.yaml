@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  spec:
+    containers:
+      - name: container
+        image: ajbura/cinny:v2.0.3
