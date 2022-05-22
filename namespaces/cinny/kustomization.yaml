@@ -20,10 +20,9 @@ namePrefix: cinny-
 commonLabels:
   app.kubernetes.io/name: cinny
 
-labels:
-  - pairs:
-      containerport: "80"
-      route: Host(`cinny.codegameeat.com`)
+commonAnnotations:
+    containerport: "80"
+    route: Host(`cinny.codegameeat.com`)
 
 images:
 - name: foo/bar

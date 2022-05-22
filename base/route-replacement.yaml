@@ -1,6 +1,6 @@
 source:
   kind: Deployment
-  fieldPath: metadata.labels.route
+  fieldPath: metadata.annotations.route
 targets:
 - select:
     kind: IngressRoute

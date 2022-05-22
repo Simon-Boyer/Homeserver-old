@@ -1,6 +1,6 @@
 source:
   kind: Deployment
-  fieldPath: metadata.labels.containerport
+  fieldPath: metadata.annotations.containerport
 targets:
 - select:
     kind: Service
