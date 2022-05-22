@@ -5,4 +5,4 @@ targets:
 - select:
     kind: IngressRoute
   fieldPaths: 
-  - spec.routes.[kind=Rule].services[0].name
+  - spec.routes.[kind=Rule].services.0.name
