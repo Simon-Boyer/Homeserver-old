@@ -12,10 +12,10 @@ spec:
           ports:
           - containerPort: 80
             name: http
-            volumeMounts:
-            - name: config
-              mountPath: /app/public/conf.yml
-              subPath: conf.yml
+          volumeMounts:
+          - name: config
+            mountPath: /app/public/conf.yml
+            subPath: conf.yml
       volumes:
       - name: config
         configMap:
