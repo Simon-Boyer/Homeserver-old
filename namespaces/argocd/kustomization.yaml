@@ -6,3 +6,4 @@ namespace: argocd
 resources:
   - project.yaml
   - applications.yaml
+  - kustomize-options.yaml

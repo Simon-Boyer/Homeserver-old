@@ -1,0 +1,8 @@
+source:
+  kind: Service
+  fieldPath: metadata.name
+targets:
+- select:
+    kind: IngressRoute
+  fieldPaths: 
+  - spec.routes.[kind=Rule].services[0].name

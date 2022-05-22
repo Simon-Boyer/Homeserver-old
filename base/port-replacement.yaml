@@ -1,0 +1,10 @@
+source:
+  kind: Deployment
+  fieldPath: metadata.labels.containerport
+targets:
+- select:
+    kind: Service
+  fieldPaths: 
+  - spec.ports.[name=http].targetPort
+
+

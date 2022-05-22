@@ -1,13 +1,31 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+bases:
+  - ../../base
+
+replacements:
+- path: ../../base/port-replacement.yaml
+- path: ../../base/route-replacement.yaml
+- path: ../../base/ingress-service-replacement.yaml
+
+resources:
+- app-overlay.yaml
+
+## MODIFY BELOW ##
+## ↓ ↓ ↓ ↓ ↓ ↓  ##
+
 namespace: cinny-app
 namePrefix: cinny-
 commonLabels:
   app.kubernetes.io/name: cinny
 
-resources:
-- namespace.yaml
-- deployment.yaml
-- service.yaml
-- ingress.yaml
+labels:
+  - pairs:
+      containerport: "80"
+      route: Host(`cinny.codegameeat.com`)
+
+images:
+- name: foo/bar
+  newName: ajbura/cinny
+  newTag: v2.0.3

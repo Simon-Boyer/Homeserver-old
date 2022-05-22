@@ -1,16 +1,15 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: ingressroutetls
-  namespace: default
+  name: ingress
 spec:
   entryPoints:
     - websecure
   routes:
-  - match: Host(`cinny.codegameeat.com`)
+  - match: Host(`foo.codegameeat.com`)
     kind: Rule
     services:
-    - name: cinny-service
+    - name: service
       port: 80
   tls:
     certResolver: le
