@@ -16,24 +16,19 @@ spec:
       selfHeal: true
 
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: traefik-mesh
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: traefik-mesh
-  namespace: traefik-mesh
+  name: traefik-mesh-source
 spec:
-  project: public
-  source:
-    chart: traefik-mesh
-    repoURL: https://helm.traefik.io/mesh
-    targetRevision: 4.0.2
-    helm:
-      releaseName: traefik-mesh
+  project: default
   destination:
-    server: "https://kubernetes.default.svc"
-    namespace: traefik-mesh
+    namespace: public
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/Simon-Boyer/homeserver'
+    targetRevision: main
+    path: namespaces/traefik-mesh
+  syncPolicy:
+    automated:
+      selfHeal: true
