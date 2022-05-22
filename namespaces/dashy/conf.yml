@@ -4,6 +4,7 @@ pageInfo:
 appConfig:
   theme: dashy-docs
   language: en
+  disableConfiguration: true
 sections:
   - name: Coding
     icon: fas fa-rocket
