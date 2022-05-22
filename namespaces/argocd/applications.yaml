@@ -16,6 +16,11 @@ spec:
       selfHeal: true
 
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik-mesh
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -31,3 +36,4 @@ spec:
       releaseName: traefik-mesh
   destination:
     server: "https://kubernetes.default.svc"
+    namespace: traefik-mesh
