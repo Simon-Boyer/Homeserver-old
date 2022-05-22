@@ -31,4 +31,3 @@ spec:
       releaseName: traefik-mesh
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: traefik-mesh
