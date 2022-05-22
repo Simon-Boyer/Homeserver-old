@@ -5,12 +5,11 @@ bases:
   - ../../base
 
 replacements:
-- path: ../../base/port-replacement.yaml
 - path: ../../base/route-replacement.yaml
 - path: ../../base/ingress-service-replacement.yaml
 
 resources:
-- app-overlay.yaml
+- deployment.yaml
 
 ## MODIFY BELOW ##
 ## ↓ ↓ ↓ ↓ ↓ ↓  ##
@@ -21,10 +20,4 @@ commonLabels:
   app.kubernetes.io/name: cinny
 
 commonAnnotations:
-    containerport: "80"
     route: Host(`cinny.codegameeat.com`)
-
-images:
-- name: foo/bar
-  newName: ajbura/cinny
-  newTag: v2.0.3

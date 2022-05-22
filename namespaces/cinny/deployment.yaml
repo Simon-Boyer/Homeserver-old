@@ -2,13 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment
-  labels:
-    containerport: 40
-    route: Host(`a.codegameeat.com`)
 spec:
   replicas: 1
   template:
     spec:
       containers:
         - name: container
-          image: foo/bar:latest
+          image: ajbura/cinny:v2.0.3
+          ports:
+          - containerPort: 80
+            name: http
