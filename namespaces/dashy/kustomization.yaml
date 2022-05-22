@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+replacements:
+- path: ../../base/route-replacement.yaml
+- path: ../../base/ingress-service-replacement.yaml
+
+resources:
+- deployment.yaml
+
+## MODIFY BELOW ##
+## ↓ ↓ ↓ ↓ ↓ ↓  ##
+
+namespace: dashy-app
+namePrefix: dashy-
+commonLabels:
+  app.kubernetes.io/name: dashy
+
+commonAnnotations:
+    route: Host(`codegameeat.com`)
+
+configMapGenerator:
+- name: dashy-config
+  files:
+  - conf.yml

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: container
+          image: lissy93/dashy:2.0.9
+          ports:
+          - containerPort: 80
+            name: http
+            volumeMounts:
+            - name: config
+              mountPath: /app/public/conf.yml
+              subPath: conf.yml
+      volumes:
+      - name: config
+        configMap:
+          name: dashy-config
