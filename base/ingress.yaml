@@ -10,6 +10,6 @@ spec:
     kind: Rule
     services:
     - name: service
-      port: http
+      port: 80
   tls:
     certResolver: le
