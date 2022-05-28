@@ -780,7 +780,7 @@ grafana:
             matcherRegex: ((\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+))
             name: TraceID
             url: $${__value.raw}
-          maxLines: 1000
+        maxLines: 1000
     - name: Tempo
       type: tempo
       uid: tempo
