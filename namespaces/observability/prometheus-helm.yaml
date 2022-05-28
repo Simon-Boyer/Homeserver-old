@@ -12,7 +12,7 @@ spec:
     targetRevision: 35.4.2
     helm:
       valueFiles:
-        - prometheus-values.yaml
+        - https://raw.githubusercontent.com/Simon-Boyer/Homeserver/main/namespaces/observability/prometheus-values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: observability
