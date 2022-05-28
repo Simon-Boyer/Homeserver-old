@@ -781,18 +781,18 @@ grafana:
               url: $${__value.raw}
           maxLines: 1000
       version: 1
-   - name: Tempo
-     type: tempo
-     uid: tempo
-     url: http://tempo.observability.traefik.mesh:3100
-     access: proxy
-     version: 1
-   - name: Cortex
-     type: prometheus
-     uid: cortex
-     url: http://cortex.observability.traefik.mesh:80/api/prom
-     access: proxy
-     version: 1
+    - name: Tempo
+      type: tempo
+      uid: tempo
+      url: http://tempo.observability.traefik.mesh:3100
+      access: proxy
+      version: 1
+    - name: Cortex
+      type: prometheus
+      uid: cortex
+      url: http://cortex.observability.traefik.mesh:80/api/prom
+      access: proxy
+      version: 1
   # - name: prometheus-sample
   #   access: proxy
   #   basicAuth: true
