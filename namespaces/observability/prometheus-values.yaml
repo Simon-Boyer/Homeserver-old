@@ -775,12 +775,6 @@ grafana:
       url: http://loki.observability.traefik.mesh:3100
       access: proxy
       version: 1
-      jsonData:
-        derivedFields:
-          - datasourceUid: tempo
-            matcherRegex: ((\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+)(\d+|[a-z]+))
-            name: TraceID
-            url: $${__value.raw}
     - name: Tempo
       type: tempo
       uid: tempo
