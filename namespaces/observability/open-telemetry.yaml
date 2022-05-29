@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tempo
+  name: opentelemetry
   namespace: argocd
 spec:
   project: public
   source:
-    chart: tempo
-    repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 0.15.3
+    chart: opentelemetry-operator
+    repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+    targetRevision: 0.7.0
   destination:
     server: "https://kubernetes.default.svc"
     namespace: observability
