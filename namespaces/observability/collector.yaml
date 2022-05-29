@@ -21,7 +21,7 @@ spec:
 
     exporters:
       otlp:
-        endpoint: tempo.observability.traefik.mesh:4317
+        endpoint: tempo.observability.svc.cluster.local:4317
         tls:
           insecure_skip_verify: true
 
