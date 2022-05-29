@@ -1,0 +1,49 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: hubble-collector
+spec:
+  image: ghcr.io/cilium/hubble-otel/otelcol:v0.1.1
+  volumes:
+    # it's possible to use the UNIX socket also, for which
+    # the following volume will be needed
+    - name: cilium-run
+      hostPath:
+        path: /var/run/cilium
+        type: Directory
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:55690
+      hubble:
+        # NODE_IP is substituted by the collector at runtime
+        # the '\' prefix is required only in order for this config to be
+        # inlined in the guide and make it easy to paste, i.e. to avoid
+        # shell subtituting it
+        endpoint: unix:///var/run/cilium/hubble.sock
+        buffer_size: 100
+        include_flow_types:
+          # this sets an L7 flow filter, removing this section will
+          # disable filtering and result all types of flows being turned
+          # into spans;
+          # other type filters can be set, the names are same as what's
+          # used in 'hubble observe -t <type>'
+          traces: ["l7"]
+
+    processors:
+      batch:
+        timeout: 30s
+        send_batch_size: 100
+
+    exporters:
+      tempo:
+        endpoint: tempo.observability.traefik.mesh:3100
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp, hubble]
+          processors: [batch]
+          exporters: [tempo]
