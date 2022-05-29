@@ -8,7 +8,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: traefik-mesh
-  namespace: traefik-mesh
+  namespace: argocd
 spec:
   project: public
   source:
