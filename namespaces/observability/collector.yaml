@@ -13,7 +13,7 @@ spec:
             endpoint: 0.0.0.0:55690
       jaeger:
         protocols:
-          thrift_http:
+          thrift_compact:
     processors:
       batch:
         timeout: 30s
