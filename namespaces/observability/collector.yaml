@@ -20,7 +20,7 @@ spec:
         send_batch_size: 100
 
     exporters:
-      tempo:
+      otlp:
         endpoint: tempo.observability.traefik.mesh:3100
 
     service:
@@ -28,4 +28,4 @@ spec:
         traces:
           receivers: [otlp, jaeger]
           processors: [batch]
-          exporters: [tempo]
+          exporters: [otlp]
