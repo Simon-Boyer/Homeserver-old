@@ -24,6 +24,7 @@ spec:
         endpoint: tempo.observability.svc.cluster.local:4317
         tls:
           insecure_skip_verify: true
+          insecure: true
 
     service:
       pipelines:
