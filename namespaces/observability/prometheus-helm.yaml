@@ -803,6 +803,16 @@ spec:
             url: http://tempo.observability.traefik.mesh:3100
             access: proxy
             version: 1
+            jsonData:
+              tracesToLogs:
+                datasourceUid: 'loki'
+                tags: ['job', 'instance', 'pod', 'namespace']
+                mappedTags: [{ key: 'service.name', value: 'service' }]
+                mapTagNamesEnabled: false
+                spanStartTimeShift: '1h'
+                spanEndTimeShift: '1h'
+                filterByTraceID: false
+                filterBySpanID: false
 
           ## Passed to grafana subchart and used by servicemonitor below
           ##
