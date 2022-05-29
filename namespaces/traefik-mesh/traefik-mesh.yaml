@@ -60,6 +60,7 @@ spec:
           deploy: true
           jaeger:
             enabled: true
+            localAgentHostPort: "tempo.observability.svc.cluster.local:6831"
         metrics:
           deploy: true
           prometheus:

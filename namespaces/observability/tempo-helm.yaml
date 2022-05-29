@@ -18,6 +18,7 @@ spec:
         traces:                                       # To enable ports for different tracing formats
           jaeger:                                     # Enabling port for jaeger HTTP endpoint of Tempo
             thriftHttp: true
+            thriftCompact: true
           otlp:
             http: true                                # Enabling port for openTelemetry HTTP endpoint of Tempo
             grpc: true                                # Enabling port for openTelemetry gRPC endpoint of Tempo
