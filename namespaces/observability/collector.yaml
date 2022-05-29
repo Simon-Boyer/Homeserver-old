@@ -18,6 +18,9 @@ spec:
         protocols:
           grpc:
             endpoint: 0.0.0.0:55690
+      jaeger:
+        protocols:
+          thrift_http:
       hubble:
         # NODE_IP is substituted by the collector at runtime
         # the '\' prefix is required only in order for this config to be

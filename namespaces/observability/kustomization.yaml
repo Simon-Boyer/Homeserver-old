@@ -8,5 +8,5 @@ resources:
 - prometheus-helm.yaml
 - tempo-helm.yaml
 - open-telemetry.yaml
-- hubble-collector.yaml
+- collector.yaml
 - cilium-rules.yaml
