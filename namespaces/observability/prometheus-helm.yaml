@@ -787,6 +787,7 @@ spec:
           additionalDataSources:
           - name: Loki
             type: loki
+            uid: loki
             url: http://loki.observability.traefik.mesh:3100
             access: proxy
             jsonData:
