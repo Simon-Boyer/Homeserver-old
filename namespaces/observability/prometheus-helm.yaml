@@ -755,7 +755,7 @@ spec:
 
               ## URL of prometheus datasource
               ##
-              url: http://kube-prometheus-stack-prometheus.observability.traefik.mesh:9090/
+              url: http://kube-prometheus-stack-prometheus.observability.traefik.mesh:9090
 
               # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
               # defaultDatasourceScrapeInterval: 15s
