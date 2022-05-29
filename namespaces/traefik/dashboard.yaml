@@ -7,8 +7,8 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`traefik.codegameeat.com`)
+    - match: Host(`traefik.codegameeat.com` && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       kind: Rule
       services:
-        - name: api@internal
+        - name: api@traefik
           kind: TraefikService
