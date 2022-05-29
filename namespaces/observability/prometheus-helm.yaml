@@ -10,9 +10,6 @@ spec:
     chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 35.4.2
-    helm:
-      valueFiles:
-        - https://raw.githubusercontent.com/Simon-Boyer/Homeserver/main/namespaces/observability/prometheus-values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: observability
