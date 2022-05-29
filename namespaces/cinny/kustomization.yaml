@@ -20,4 +20,4 @@ commonLabels:
   app.kubernetes.io/name: cinny
 
 commonAnnotations:
-    route: Host(`cinny.codegameeat.com`)
+    route: Host(`cinny.matrix.codegameeat.com`)
