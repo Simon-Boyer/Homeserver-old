@@ -7,3 +7,4 @@ resources:
 - loki-helm.yaml
 - prometheus-helm.yaml
 - tempo-helm.yaml
+- open-telemetry.yaml
