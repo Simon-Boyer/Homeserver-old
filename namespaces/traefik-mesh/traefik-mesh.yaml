@@ -17,6 +17,16 @@ spec:
     targetRevision: 4.0.2
     helm:
       releaseName: traefik-mesh
+      values: |
+        tracing:
+          deploy: true
+          jaeger:
+            enabled: true
+        metrics:
+          deploy: true
+          prometheus:
+            # whether to expose Prometheus metrics
+            enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: traefik-mesh
