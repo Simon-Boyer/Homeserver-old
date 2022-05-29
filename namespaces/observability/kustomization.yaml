@@ -10,3 +10,4 @@ resources:
 - open-telemetry.yaml
 - collector.yaml
 - cilium-rules.yaml
+- ingress.yaml
