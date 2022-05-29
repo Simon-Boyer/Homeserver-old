@@ -18,6 +18,43 @@ spec:
     helm:
       releaseName: traefik-mesh
       values: |
+        limits:
+          http: 10
+          tcp: 25
+          udp: 25
+
+        controller:
+          image:
+            name: traefik/mesh
+
+          resources:
+            limit:
+              mem: 100Mi
+              cpu: 200m
+            request:
+              mem: 50Mi
+              cpu: 100m
+
+          # Added so we can launch on nodes with restrictions.
+          nodeSelector: {}
+          tolerations: []
+          affinity: {}
+
+        proxy:
+          image:
+            name: traefik
+
+          resources:
+            limit:
+              mem: 100Mi
+              cpu: 200m
+            request:
+              mem: 50Mi
+              cpu: 100m
+
+          # Added so we can launch on nodes with restrictions.
+          nodeSelector: {}
+          tolerations: []
         tracing:
           deploy: true
           jaeger:
