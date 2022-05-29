@@ -784,7 +784,7 @@ spec:
 
           ## Configure additional grafana datasources (passed through tpl)
           ## ref: http://docs.grafana.org/administration/provisioning/#datasources
-          additionalDataSources: []
+          additionalDataSources:
           - name: Loki
             type: loki
             url: http://loki.observability.traefik.mesh:3100
