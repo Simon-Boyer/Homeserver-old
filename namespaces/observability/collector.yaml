@@ -2,7 +2,7 @@ apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
 metadata:
   name: collector
-  namespace: observability
+  namespace: traefik
 spec:
   mode: sidecar
   config: |
