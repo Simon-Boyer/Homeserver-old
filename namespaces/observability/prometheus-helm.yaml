@@ -788,7 +788,7 @@ spec:
           - name: Loki
             type: loki
             uid: loki
-            url: http://loki.observability:3100
+            url: http://loki.observability.traefik.mesh:3100
             access: proxy
             jsonData:
               derivedFields:
@@ -801,7 +801,7 @@ spec:
           - name: Tempo
             type: tempo
             uid: tempo
-            url: http://tempo.observability:3100
+            url: http://tempo.observability.traefik.mesh:3100
             access: proxy
             version: 1
             jsonData:

@@ -26,7 +26,7 @@ spec:
         controller:
           image:
             name: traefik/mesh
-          logLevel: debug
+          logLevel: error
 
           resources:
             limit:
@@ -57,7 +57,7 @@ spec:
           nodeSelector: {}
           tolerations: []
         tracing:
-          deploy: true
+          deploy: false
           jaeger:
             enabled: true
             localAgentHostPort: "tempo.observability.svc.cluster.local:6831"
