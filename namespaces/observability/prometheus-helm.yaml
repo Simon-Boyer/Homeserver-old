@@ -805,6 +805,12 @@ spec:
             access: proxy
             version: 1
             jsonData:
+              nodeGraph:
+                enabled: true
+              lokiSearch:
+                datasourceUid: 'loki'
+              search:
+                hide: false
               tracesToLogs:
                 datasourceUid: 'loki'
                 tags: ['job', 'instance', 'pod', 'namespace']
