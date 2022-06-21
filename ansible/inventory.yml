@@ -1,0 +1,8 @@
+---
+
+k3s_cluster:
+  hosts:
+    kube-0:
+      ansible_host: 10.10.1.2
+      ansible_python_interpreter: /usr/bin/python3
+      ansible_connection: local
