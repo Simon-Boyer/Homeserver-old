@@ -15,11 +15,23 @@
     SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
-    - ansible.builtin.command: "curl -L {{ clusterctl_release }} -o clusterctl"
-    - ansible.builtin.command: chmod +x clusterctl
-    - ansible.builtin.command: ./clusterctl init -b talos -c talos -i sidero
+    - shell: curl -L {{ clusterctl_release }} -o /usr/local/bin/clusterctl
+    - file:
+        path: /usr/local/bin/clusterctl
+        mode: '0755'
+    - shell: clusterctl init -b talos -c talos -i sidero
 
 - name: Send kubeconfig
   hosts: k3s_cluster
   tasks:
-    - ansible.builtin.shell: sed 's/127.0.0.1/{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}/g' /etc/rancher/k3s/k3s.yaml | nc {{ computer_manager_ip }} 1605
+    - shell: sed 's/127.0.0.1/{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}/g' /etc/rancher/k3s/k3s.yaml | nc {{ computer_manager_ip }} 1605
+
+- name: Argocd
+  hosts: k3s_cluster
+  tasks:
+    - shell: kubectl create namespace argocd
+    - shell: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+    - git:
+        repo: https://github.com/Simon-Boyer/Homeserver.git
+        dest: /tmp/simon-homeserver
+    - shell: kubectl apply -k /tmp/simon-homeserver/namespaces/argocd
