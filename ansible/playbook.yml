@@ -13,6 +13,7 @@
     SIDERO_CONTROLLER_MANAGER_HOST_NETWORK: "true"
     SIDERO_CONTROLLER_MANAGER_API_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
     SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
+    KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
     - ansible.builtin.command: "curl -L {{ clusterctl_release }} -o clusterctl"
     - ansible.builtin.command: chmod +x clusterctl
