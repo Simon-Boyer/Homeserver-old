@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt install netcat
+apt install -y netcat
 pip3 install ansible
 
 ansible-galaxy install xanmanning.k3s
