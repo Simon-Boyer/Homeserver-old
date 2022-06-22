@@ -1,4 +1,6 @@
-# Homeserver
+# Homeserver - WIP
+
+**WIP - Do not use this for now**
 
 1. Fork to change to your settings
 2. Configure `ansible/group_vars/all.yml` and `ansible/inventory` and push to your fork
