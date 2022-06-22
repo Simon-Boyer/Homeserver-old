@@ -14,7 +14,9 @@
     SIDERO_CONTROLLER_MANAGER_API_ENDPOINT: "${{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
     SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "${{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
   tasks:
-    - ansible.builtin.command: clusterctl init -b talos -c talos -i sidero
+    - ansible.builtin.command: curl -L ${{ clusterctl_release }} -o clusterctl
+    - ansible.builtin.command: chmod +x clusterctl
+    - ansible.builtin.command: ./clusterctl init -b talos -c talos -i sidero
 
 - name: Send kubeconfig
   hosts: k3s_cluster

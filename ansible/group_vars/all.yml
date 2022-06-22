@@ -1,1 +1,2 @@
 computer_manager_ip: 192.168.1.218
+clusterctl_release: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/clusterctl-linux-arm64
