@@ -1,0 +1,41 @@
+c3os:
+  network_token: "b3RwOgogIGRodDoKICAgIGludGVydmFsOiA5MjIzMzcyMDM2ODU0Nzc1ODA3CiAgICBrZXk6IFhKWU9SN1ZXSlJYTlJTWkVLTzJJQ0dOWFlXRjVYQURISU5IMkFQNkM1TzdaRFNNTjI0R1EKICAgIGxlbmd0aDogMzIKICBjcnlwdG86CiAgICBpbnRlcnZhbDogOTIyMzM3MjAzNjg1NDc3NTgwNwogICAga2V5OiBQQkZNRVVWV0FMTFhFUUlSMlZHVkhGRzVWR0NFN0pLSU9HTUZOV0lSNUlYSEQzSjUzVEdBCiAgICBsZW5ndGg6IDMyCnJvb206IEFISDJOV1lPNk02NFFZVlRQVDJXT0hNVTMzUFZUWENKUTRWMkNSVU9HVTdYTFI0U0ZaRVEKcmVuZGV6dm91czogQ0pXU09zTm9sVGR3YmptamdORnhtdnhldVFGT0FTa2MKbWRuczogbEtxU25xUmRNZGlVSVRORUlSblhBYnJEdW1ST0NNb3cKbWF4X21lc3NhZ2Vfc2l6ZTogMjA5NzE1MjAK"
+  # Reboot after installation
+  reboot: true
+  # Set to true when installing without Pairing
+  offline: true
+  # Manually set node role. Available: master, worker. Defaults auto (none)
+  role: "master"
+
+vpn:
+  DHCP: "false"
+  ADDRESS: "10.10.1.2/24"
+
+k3s:
+  # Additional env/args for k3s server instances
+  args:
+  - --disable traefik
+  - --disable servicelb
+  - --cluster-init
+  # Enabling below it replaces args/env entirely
+  # replace_env: true
+  # replace_args: true
+
+# k3s-agent:
+#   # Additional env/args for k3s agent instances
+#   env:
+#     K3S_NODE_NAME: "foo"
+#   args:
+#   - --private-registry "..."
+#   # Enabling below it replaces args/env entirely
+#   # replace_env: true
+#   # replace_args: true
+
+# # Cloud init syntax to setup users. 
+# # See https://rancher.github.io/elemental-toolkit/docs/reference/cloud_init/
+stages:
+   network:
+     - name: "Setup users"
+       authorized_keys:
+        c3os: 
+        - github:Simon-Boyer
