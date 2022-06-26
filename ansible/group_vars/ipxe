@@ -1,0 +1,11 @@
+#!ipxe
+
+
+set base-url 
+
+
+http://stable.release.flatcar-linux.net/amd64-usr/current
+
+kernel ${base-url}/flatcar_production_pxe.vmlinuz initrd=flatcar_production_pxe_image.cpio.gz sshkey=AAAAB3NzaC1yc2EAAAADAQABAAABgQClzy8SNZ84mxWnxiDU/GmyzDYA6d/EVhDJqGnejaYpm/x678VQ2f3X/Ez/I6uuhINZqRj4J1ttQFxGQZpe3KoxU7WjeZWOq5WblQLduyE0s2ZDwWSBtjln0ap3Jd3rScp/FOzONb+74sx32XKg8vi7KmEUcYn7Cx444Mz1m+Ef4T9PZHaTeic8K3uNfkd5B4iStjox89vIwEGbSeB01mvAPkZAzdHdH60FTSSRe3FGopRHyt7LaO9RJyiHOXX4jSjYGAlefLhECPkhMyUZWzz57JjdPUsC9RqY9HLOxqJJu07Rdv6jqg9h+9WJlpKunGvkX7+6Z3hyzjlssBTRe3Ly0//gB7Lmg4IJCl476xOe28OmeH5J4NpDDrWm8vNCAiDMSykRtpoJo42eTd3i29QbU/KsgwuXybBthc6jtinx/JK2t0NLOG3OC2ssIVMHxjUPdJI7abX5n4q19NnUVwbHvObGgcCwpMQXIS9rOZOCmHcwDU35ldi30sOZLwnGJXE=
+initrd ${base-url}/flatcar_production_pxe_image.cpio.gz
+boot
