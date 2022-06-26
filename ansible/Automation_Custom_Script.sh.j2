@@ -1,0 +1,11 @@
+#!/bin/bash
+
+curl -fsSL https://tailscale.com/install.sh | sh
+tailscale up --authkey {{ tailscale_key.user_input }} --ssh --advertise-tags=tag:server
+
+#apt install -y netcat
+#pip3 install ansible
+
+#ansible-galaxy install xanmanning.k3s
+#ansible-pull --purge -d /var/tmp/ansible-homeserver -i /var/tmp/ansible-homeserver/ansible/inventory.yml \
+#-U https://github.com/Simon-Boyer/Homeserver.git ansible/playbook.yml

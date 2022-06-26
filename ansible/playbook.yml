@@ -1,6 +1,66 @@
 ---
 
-- name: Build a cluster with a single control node
+- name: Burn images on devices
+  hosts: k3s_cluster
+  gather_facts: false
+  serial: 1
+  vars_prompt:
+    - name: hosts_password
+      private: true
+      prompt: Enter master hosts password
+      salt_size: 8
+  tasks:
+    - shell: mkdir -p /tmp/dietpi/mount
+      delegate_to: 127.0.0.1
+    - get_url: 
+        url: "{{ image_link }}"
+        dest: "/tmp/dietpi/{{ ansible_host }}.7z"
+      delegate_to: 127.0.0.1
+    - shell: "7z x /tmp/dietpi/{{ ansible_host }}.7z -o/tmp/dietpi/{{ ansible_host }} -y"
+      delegate_to: 127.0.0.1
+    - shell: "mv /tmp/dietpi/{{ ansible_host }}/*.img /tmp/dietpi/{{ ansible_host }}.img"
+      delegate_to: 127.0.0.1
+    - pause: 
+        prompt: "Device path to write to (DANGER):"
+        echo: true
+      register: device_path
+    - pause:
+        prompt: "Press ENTER to confirm SD card path: {{device_path.user_input}}"
+    - shell: "/usr/bin/dd if=/tmp/dietpi/{{ ansible_host }}.img of={{device_path.user_input}}"
+      become: true
+      delegate_to: 127.0.0.1
+    - pause:
+        prompt: "Go to https://login.tailscale.com/admin/authkeys to create a key. Type it here:"
+        echo: true
+      register: tailscale_key
+    - shell: /usr/bin/mount {{device_path.user_input}}1 /tmp/dietpi/mount
+      delegate_to: 127.0.0.1
+      become: true
+    - template:
+        src: dietpi.j2
+        dest: /tmp/dietpi/mount/boot/dietpi.txt
+      delegate_to: 127.0.0.1
+      become: true
+    - template:
+        src: Automation_Custom_Script.sh.j2
+        dest: /tmp/dietpi/mount/boot/Automation_Custom_Script.sh
+      delegate_to: 127.0.0.1
+      become: true
+    - shell: /usr/bin/umount /tmp/dietpi/mount
+      delegate_to: 127.0.0.1
+      become: true
+    - pause:
+        prompt: SD card for {{ ansible_host }} ready. Press ENTER to continue with the next card.
+
+- name: Wait for devices availability
+  hosts: k3s_cluster
+  gather_facts: false
+  tasks:
+    - wait_for:
+        port: 22
+        delay: 10
+
+- name: Build k3s control plane
   hosts: k3s_cluster
   vars:
     k3s_become: true
@@ -11,8 +71,8 @@
   hosts: k3s_cluster
   environment:
     SIDERO_CONTROLLER_MANAGER_HOST_NETWORK: "true"
-    SIDERO_CONTROLLER_MANAGER_API_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
-    SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}"
+    SIDERO_CONTROLLER_MANAGER_API_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
+    SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
     - shell: curl -L {{ clusterctl_release }} -o /usr/local/bin/clusterctl
@@ -21,17 +81,29 @@
         mode: '0755'
     - shell: clusterctl init -b talos -c talos -i sidero
 
-- name: Send kubeconfig
-  hosts: k3s_cluster
-  tasks:
-    - shell: sed 's/127.0.0.1/{{ hostvars[ groups['k3s_cluster'][0] ].ansible_host }}/g' /etc/rancher/k3s/k3s.yaml | nc {{ computer_manager_ip }} 1605
+- name: DHCPd
+  hosts: kube-0
+  vars:
+    dhcp_global_subnet_mask: "{{ workers_mask }}"
+    dhcp_global_broadcast_address: "{{ workers_broardcast }}"
+    dhcp_global_domain_name: "{{ domain }}"
+    dhcp_global_bootp: allow
+    dhcp_global_booting: allow
+    dhcp_global_next_server: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
+    dhcp_global_filename: boot.img
+    dhcp_global_routers: "{{ workers_router }}"
+    dhcp_global_domain_name_servers:
+      - 1.1.1.1
+      - 1.0.0.1
+  roles:
+    - dhcp
 
-- name: Argocd
-  hosts: k3s_cluster
-  tasks:
-    - shell: kubectl create namespace argocd
-    - shell: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-    - git:
-        repo: https://github.com/Simon-Boyer/Homeserver.git
-        dest: /tmp/simon-homeserver
-    - shell: kubectl apply -k /tmp/simon-homeserver/namespaces/argocd
+# - name: Argocd
+#   hosts: k3s_cluster
+#   tasks:
+#     - shell: kubectl create namespace argocd
+#     - shell: kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+#     - git:
+#         repo: https://github.com/Simon-Boyer/Homeserver.git
+#         dest: /tmp/simon-homeserver
+#     - shell: kubectl apply -k /tmp/simon-homeserver/namespaces/argocd

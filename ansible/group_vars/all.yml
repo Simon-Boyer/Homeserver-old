@@ -1,2 +1,10 @@
 computer_manager_ip: 192.168.1.218
 clusterctl_release: https://github.com/kubernetes-sigs/cluster-api/releases/download/v1.1.4/clusterctl-linux-arm64
+workers_subdomain: 10.10.2.0
+workers_mask: 255.255.255.0
+workers_broardcast: 10.10.2.255
+domain: internal.codegameeat.com
+workers_router: 10.10.2.1
+masters_mask: 255.255.255.0
+masters_router: 10.10.1.1
+masters_dns: 1.1.1.1 1.0.0.1

@@ -13,7 +13,7 @@
 # - WARN: We cannot guarantee that all software options can handle special characters like \"$.
 
 ####### CHANGE THIS #########
-AUTO_SETUP_GLOBAL_PASSWORD=dietpi
+AUTO_SETUP_GLOBAL_PASSWORD={{ hosts_password }}
 
 ##### Language/Regional options #####
 # Locale: e.g.: "en_GB.UTF-8" / "de_DE.UTF-8" | One entry and UTF-8 ONLY!
@@ -40,16 +40,16 @@ AUTO_SETUP_NET_WIFI_COUNTRY_CODE=US
 
 # Enter your static network details below, if applicable.
 AUTO_SETUP_NET_USESTATIC=1
-AUTO_SETUP_NET_STATIC_IP=10.10.1.2
-AUTO_SETUP_NET_STATIC_MASK=255.255.255.0
-AUTO_SETUP_NET_STATIC_GATEWAY=10.10.1.1
-AUTO_SETUP_NET_STATIC_DNS=1.1.1.1 1.0.0.1
+AUTO_SETUP_NET_STATIC_IP={{ ip }}
+AUTO_SETUP_NET_STATIC_MASK={{ masters_mask }}
+AUTO_SETUP_NET_STATIC_GATEWAY={{ masters_router }}
+AUTO_SETUP_NET_STATIC_DNS={{ masters_dns }}
 
 # Set to "1" to convert DHCP leased network settings into static settings automatically on first boot.
 AUTO_SETUP_DHCP_TO_STATIC=0
 
 # Hostname
-AUTO_SETUP_NET_HOSTNAME=kube-0
+AUTO_SETUP_NET_HOSTNAME={{ ansible_host }}
 
 # Delay service starts at boot until network is established: 0=disabled | 1=enabled
 AUTO_SETUP_BOOT_WAIT_FOR_NETWORK=1
@@ -76,7 +76,7 @@ AUTO_UNMASK_LOGIND=0
 # - Option 0 = Copy your script to /boot/Automation_Custom_Script.sh and it will be executed automatically.
 # - Option 1 = Host your script online, then use e.g. AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://myweb.com/myscript.sh and it will be downloaded and executed automatically.
 # - Executed script log: /var/tmp/dietpi/logs/dietpi-automation_custom_script.log
-AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/Simon-Boyer/Homeserver/main/dietpi-script.sh
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=0
 
 # Restore a DietPi-Backup on first boot: 0 => disable | 1 => interactive restore (show list of found backups) | 2 => non-interactive restore (restore first found backup)
 # - Simply attach the drive/disk/stick with contains the backup. All attached drives will be mounted temporarily and searched automatically.
@@ -85,6 +85,7 @@ AUTO_SETUP_BACKUP_RESTORE=0
 ##### Software options #####
 # SSH server choice: 0=none/custom | -1=Dropbear | -2=OpenSSH
 AUTO_SETUP_SSH_SERVER_INDEX=0
+SOFTWARE_DISABLE_SSH_PASSWORD_LOGINS=1
 
 # SSH server pubkey
 # - Public key(s) for "root" and "dietpi" users, which will be added to ~/.ssh/authorized_keys
@@ -132,6 +133,7 @@ AUTO_SETUP_AUTOMATED=1
 
 AUTO_SETUP_INSTALL_SOFTWARE_ID=130
 AUTO_SETUP_INSTALL_SOFTWARE_ID=17
+AUTO_SETUP_INSTALL_SOFTWARE_ID=93
 
 #------------------------------------------------------------------------------------------------------
 ##### Misc DietPi program settings #####
