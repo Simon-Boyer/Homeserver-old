@@ -19,3 +19,7 @@ k3s_cluster:
       ip: 10.10.1.4
       ansible_python_interpreter: /usr/bin/python3
       image_link: https://dietpi.com/downloads/images/DietPi_RPi-ARMv8-Bullseye.7z
+
+hosts:
+  harvester:
+    ansible_host: 10.10.2.2

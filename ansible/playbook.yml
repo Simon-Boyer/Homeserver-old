@@ -59,29 +59,61 @@
     - wait_for:
         port: 22
         delay: 10
+  
+# - name: Enable ARP strict mode
+#   hosts: kube-0
+#   tasks:
+#     - shell: "kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e \"s/strictARP: false/strictARP: true/\" | kubectl apply -f - -n kube-system"
 
 - name: Build k3s control plane
   hosts: k3s_cluster
   vars:
     k3s_become: true
+#   k3s_server:
+#     disable:
+#       - traefik
+#       - servicelb
   roles:
     - role: xanmanning.k3s
 
-- name: Install Sidero
-  hosts: k3s_cluster
-  environment:
-    SIDERO_CONTROLLER_MANAGER_HOST_NETWORK: "true"
-    SIDERO_CONTROLLER_MANAGER_API_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
-    SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
+# - name: Install Sidero
+#   hosts: k3s_cluster
+#   environment:
+#     SIDERO_CONTROLLER_MANAGER_HOST_NETWORK: "true"
+#     SIDERO_CONTROLLER_MANAGER_API_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
+#     SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
+#     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
+#   tasks:
+#     - shell: curl -L {{ clusterctl_release }} -o /usr/local/bin/clusterctl
+#     - file:
+#         path: /usr/local/bin/clusterctl
+#         mode: '0755'
+#     - shell: clusterctl init -b talos -c talos -i sidero
+
+- name: Sealed Secrets
+  hosts: kube-0
+  vars: 
     KUBECONFIG: /etc/rancher/k3s/k3s.yaml
   tasks:
-    - shell: curl -L {{ clusterctl_release }} -o /usr/local/bin/clusterctl
-    - file:
-        path: /usr/local/bin/clusterctl
-        mode: '0755'
-    - shell: clusterctl init -b talos -c talos -i sidero
+    - shell: |
+        /usr/local/bin/kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.0/controller.yaml
+        /usr/bin/curl -L https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.18.0/kubeseal-0.18.0-linux-arm64.tar.gz | tar -xz
+        /usr/bin/install -m 755 kubeseal /usr/local/bin/kubeseal
+        kubeseal --fetch-cert
+      register: sealed-secret-cert
+    - copy:
+        content: "{{ sealed-secret-cert.stdout }}"
+        path: "{{ lookup('env', 'PWD') }}/../mgmt-cluster/secrets.crt"
+        delegate_to: 127.0.0.1
+    - shell: |
+        cd ../mgmt-cluster
+        export TOKEN=`cat /dev/urandom | tr -dc '[:alpha:]' | head -c25`
+        kubectl create secret generic harvester-secret --dry-run=client --from-literal="token=$TOKEN" -o yaml | kubeseal -o yaml --cert secrets.crt --scope namespace-wide
+      delegate_to: 127.0.0.1
+    - pause:
+        prompt: You need to commit ans push the newly created secret. Press Enter when done.
 
-- name: DHCPd
+- name: DHCPd Harvester create
   hosts: kube-0
   vars:
     dhcp_global_subnet_mask: "{{ workers_mask }}"
@@ -95,6 +127,36 @@
     dhcp_global_domain_name_servers:
       - 1.1.1.1
       - 1.0.0.1
+  roles:
+    - dhcp
+  
+  
+- name: Wait for harvester availability
+  hosts: harvester
+  gather_facts: false
+  tasks:
+    - wait_for:
+        port: 443
+        delay: 10
+
+- name: DHCPd Harvester join
+  hosts: kube-0
+  vars:
+    dhcp_global_subnet_mask: "{{ workers_mask }}"
+    dhcp_global_broadcast_address: "{{ workers_broadcast }}"
+    dhcp_global_domain_name: "{{ domain }}"
+    dhcp_global_bootp: allow
+    dhcp_global_booting: allow
+    dhcp_global_next_server: "{{ hostvars[ groups['k3s_cluster'][0] ].ip }}"
+    dhcp_global_filename: boot.img
+    dhcp_global_routers: "{{ workers_router }}"
+    dhcp_global_domain_name_servers:
+      - 1.1.1.1
+      - 1.0.0.1
+    dhcp_subnets:
+      - ip: "{{ workers_subdomain }}"
+        netmask: 255.255.255.0
+        range_begin: "{{ workers_subdomain_begin }}"
   roles:
     - dhcp
 

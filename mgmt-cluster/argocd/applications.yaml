@@ -10,63 +10,11 @@ spec:
   source:
     repoURL: 'https://github.com/Simon-Boyer/homeserver'
     targetRevision: main
-    path: namespaces/argocd
+    path: mgmt-cluster/argocd
   syncPolicy:
     automated:
       selfHeal: true
 
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: traefik-mesh-source
-spec:
-  project: default
-  destination:
-    namespace: public
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: 'https://github.com/Simon-Boyer/homeserver'
-    targetRevision: main
-    path: namespaces/traefik-mesh
-  syncPolicy:
-    automated:
-      selfHeal: true
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: traefik-source
-spec:
-  project: default
-  destination:
-    namespace: public
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: 'https://github.com/Simon-Boyer/homeserver'
-    targetRevision: main
-    path: namespaces/traefik
-  syncPolicy:
-    automated:
-      selfHeal: true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: metallb
-spec:
-  project: default
-  destination:
-    namespace: public
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: 'https://github.com/metallb/metallb-operator.git'
-    targetRevision: v0.12.0
-    path: bin/metallb-operator.yaml
-  syncPolicy:
-    automated:
-      selfHeal: true
 
 # ---
 # apiVersion: argoproj.io/v1alpha1

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+name: harvester
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ipxe
+spec:
+  replicas: 2
+  template:
+    spec:
+      containers:
+      - name: pixie
+        image: ghcr.io/p3lim/pixie:0.2.6
