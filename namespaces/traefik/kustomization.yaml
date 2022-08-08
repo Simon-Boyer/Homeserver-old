@@ -1,0 +1,60 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: traefik
+
+resources:
+  - cloudflare-api-secret.yaml
+
+helmCharts:
+- name: traefik
+  includeCRDs: true
+  namespace: traefik
+  releaseName: traefik
+  version: 10.19.5
+  repo: https://helm.traefik.io/traefik
+  valuesInline:
+    deployment:
+      enabled: true
+    providers:
+          kubernetesCRD:
+            enabled: true
+          kubernetesIngress:
+            enabled: true
+    env:
+        - name: CLOUDFLARE_DNS_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-api
+              key: apikey
+    ports:
+      web:
+        port: 80
+        expose: true
+        exposedPort: 80
+        protocol: TCP
+      websecure:
+        port: 443
+        expose: true
+        exposedPort: 443
+        protocol: TCP
+        tls:
+          enabled: true
+          options: ""
+          certResolver: "le"
+          domains:
+            - main: codegameeat.com
+    service:
+          enabled: true
+          type: LoadBalancer
+    additionalArguments:
+          - '--certificatesresolvers.le.acme.email=traefik.uj4zj@simplelogin.co'
+          - '--certificatesresolvers.le.acme.storage=/data/acme.json'
+          - '--certificatesresolvers.le.acme.dnschallenge=true'
+          - '--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare'
+    persistence:
+          enabled: false
+          name: traefik-pvc
+          accessMode: ReadWriteOnce
+          size: 128Mi
+          storageClass: defaultStorageClass
+          path: /data
