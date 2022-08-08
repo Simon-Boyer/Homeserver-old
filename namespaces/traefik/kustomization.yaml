@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: traefik
 
 resources:
-  - cloudflare-api-secret.yaml
+  - cloudflare-api-secret.json
 
 helmCharts:
 - name: traefik
