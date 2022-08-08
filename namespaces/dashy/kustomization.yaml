@@ -20,7 +20,7 @@ commonLabels:
   app.kubernetes.io/name: dashy
 
 commonAnnotations:
-    route: Host(`codegameeat.com`)
+    route: Host(`dashy.codegameeat.com`)
 
 configMapGenerator:
 - name: dashy-config
