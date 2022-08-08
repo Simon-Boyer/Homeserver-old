@@ -11,5 +11,8 @@ spec:
       services:
         - name: kubevious-ui-clusterip
           port: 80
+      middlewares:
+        - name: basic-auth
+          namespace: traefik
   tls:
     certResolver: le
