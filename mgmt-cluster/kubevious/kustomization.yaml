@@ -5,6 +5,8 @@ namespace: kubevious
 resources:
   - ingress.yaml
   - namespace.yaml
+  - basic-auth-sealed.json
+  - basic-auth.yaml
 
 helmCharts:
 - name: kubevious

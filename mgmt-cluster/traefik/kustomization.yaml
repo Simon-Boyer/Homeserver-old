@@ -4,8 +4,6 @@ namespace: traefik
 
 resources:
   - cloudflare-api-secret.json
-  - basic-auth-sealed.json
-  - basic-auth.yaml
 
 helmCharts:
 - name: traefik

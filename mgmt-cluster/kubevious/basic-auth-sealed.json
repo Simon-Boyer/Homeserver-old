@@ -1,0 +1,22 @@
+{
+  "kind": "SealedSecret",
+  "apiVersion": "bitnami.com/v1alpha1",
+  "metadata": {
+    "name": "basic-auth-secret",
+    "namespace": "kubevious",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "name": "basic-auth-secret",
+        "namespace": "kubevious",
+        "creationTimestamp": null
+      },
+      "data": null
+    },
+    "encryptedData": {
+      "users": "AgBMeCk6PPvIURLU3i+CdnOimzb6bOpuIVn/KHEbYSnBUsyz9amzU5iN/xg1UjhkGalPlgEz1BtK5LVLKHyM/1glbu+/6ZmEed1QRulLC4juOVQUnM+4nmDH7wD2K97DLsHlg53GFzXYAS8KQYKOkyZ3pxP/OHrZwQmwtuB4X4n88IMPCGfQc81MAa4ZrjLADkPOuLNdlmN8xlyZfW0gevhqtomgdmKCnDIsU4k1LTrnxZmPZsqpSXTCEmGlInKD4vZNbct03NSTqKXiVUqNTGU4PFAqcQ3acKkuuk25O+LdqhVZvw5YybPsjOj2yjRrNFrzsmA7clgKWt8F7PDhk9RzFXf3vry50E5xdM0ypy1chlsZOCtzT8mLtC/WLu1u2gMYFxStv+0s/EfvLcf3LDE0alYHYdFPTNKvpdShDHtaCtS2OAgcrPJBy596WtO6DoXa29wjBDI6EVifMH61Vnjk4ipvAlvwVSQHeeCPipIkTE6rlv8wbEMgkod9PJnSBbA/kCI2QADrAVyBr4OG9pd/xo50eXcp+TR/wYiQlM9zh32U+huWQ9V2cYw4pEfm+szbLV+T+0RTmFhJ3pqSzXRGlBUKPnG5fqagWZNladAxLbOZSiK+TbHSL6tGpVojm5BkfclXsa+KPzTB+zxoTtxLPcBTL2wck18dsd/wo2GV2m175hnS1FI4KItAPqw2mS58KjDiPjNl4dMXHAmAhCLxikQaV2u0HRGVIqM6yBMVo9DwAITHSVuUpS87"
+    }
+  }
+}
