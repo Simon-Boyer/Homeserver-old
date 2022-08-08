@@ -12,6 +12,6 @@ spec:
         - name: kubevious-ui-clusterip
           port: 80
       middlewares:
-        - name: kubevious-basicauth
+        - name: basicauth
   tls:
     certResolver: le
