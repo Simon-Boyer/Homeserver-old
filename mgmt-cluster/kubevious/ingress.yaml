@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubevious-ingress
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`kube.codegameeat.com`)
+      services:
+        - name: kubevious-ui
+          port: 80
+  tls:
+    certResolver: le

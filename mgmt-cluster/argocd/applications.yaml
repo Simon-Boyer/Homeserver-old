@@ -80,7 +80,24 @@ spec:
   source:
     repoURL: 'https://github.com/Simon-Boyer/homeserver'
     targetRevision: japan-cluster
-    path: namespaces/traefik
+    path: mgmt-cluster/traefik
+  syncPolicy:
+    automated:
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubevious
+spec:
+  project: default
+  destination:
+    namespace: kubevious
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/Simon-Boyer/homeserver'
+    targetRevision: japan-cluster
+    path: mgmt-cluster/kubevious
   syncPolicy:
     automated:
       selfHeal: true
