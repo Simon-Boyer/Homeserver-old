@@ -13,11 +13,10 @@
         "namespace": "traefik",
         "creationTimestamp": null
       },
-      "type": "kubernetes.io/basic-auth",
       "data": null
     },
     "encryptedData": {
-      "users": "AgAxUN6WbTXQqs9+fACiGopxJBWuGOlse3lsT9zEWl4SugTs0mCVnny18y0FrxXsxyhJN0Haky+g6yL2YQaCIehACNoGrcXrAPsr+y7S/kvESoT7eMsFf2Q5XZ3fK5gzhe9lUH8tYM/kZh6pq0FseL0oVckjfze+gsvsm4RIBvS5DPK92az9nzpdsqzN7bmLOruZv5HGJR/HdwUQ9lULaejq4J53u1+gw++ti5hOmqMMHIFoUx+67JZb9ISTCph7YcuX51hlqqDjJyikuCvsvl6B6RUGWqe2Y134kaOSc0Fgz6KnPyLYuCIbx5M7oNB5v6wo7nqWpNphQr16ghPxh/hls+W6eT6VjKcMG4rRpOaLA+U+9QzzrUNt+T42KUGpmK6uSpS8mcU/ENsv425UghxiovCiux54WYTe2PMKcdeoKsN3LqFAFIuKvjNji9gljjsuXzHlfYDywIwWuPwDkECKRsuek5mxq2tUwWpsLf9FKpjwp5/vWLjQLxqqxEk/EJVK5TI0bYiF54VwIbIlJvH5l3SLZUTGf5R1gLnQHNk2G02e7eBndJZWoA8N/kIbIqSAhV93NANk6isjN00q83suVOxcN9NqSVKW0MDfzD2e/aui0kKkqIZU8mbhvAWj/4bU7iCCCeYvguRPfjs4dbHAhLz3TkwBBVjJ3wUsKPtbx+XLe8fY/YV4ESY5U6iRzVcumlkv4YqdD9GYJJ4xuhaIyaaZLvhPsCFx39ZJxWC7brl4ImfHM5QHfGQl"
+      "users": "AgAb8W1eDPtiNOyCm8oc9TMqkP4+CKMU7vc1yWLXOVphUvKqVBCQ9nkRpC+m7FCFDqEbBjdD1GzI8j13akkfxypLFlszM0Y98hDo0WV/kbIdWegYgnUtOsMNcXG6qorWgoQoX0DgrchbEU351a+hrQN7iSMmMBHejg2pwn3Avvwj2pJ5NbXPrR8ANCHWdSq6KbYeklvdcllT2UB/bodlccVUOhEIPqKIEJQY/QX8NL4Z67EGn/3MMauKwSBaFSevz2B4A/YVhrH3dcFiMbybcapmwXb69cYzH6zM2kjlVaLU9jmwWZ+4ho6x//BiFGG8q2/bTqappI7Af1Sp49jP9VjU4c5d6dASoQ2wPZ+xAs4sGt4XJzgxf7ypOGET1Tj7ZP+hLT3HRL8uOaxmC1hZHczLRStAMfDBhWnL8EVOeXaSXtPof+5naCdSyxkBG3SnFLAsUzmnRpZ92jIrcWnrzjx7FOG7vdEcemt0oozh8JGTbTRIdxMSjtI9vcyRAXZL2FOdwJnjak/auMEEYxtlmgJAM7G07flCLrF50DvuTiXj8lcMiEMCUfkg8X4hbwVKK4ZdlIOnepAaIRGrpzy1swQK03MvTa16yGmMphZcixEExTNgFZ/JNKYHNPSicf0RURvpcEhBo3YMSU23VlA/wAJcO9F6pabL+hR/9eqCOpqynvGqRPzTVgVRRiMsGI5DfOIwM0pLSQ0xnQS5JYw7SDwMzUYwTlrk1sPqIVowyoal9aC64A78IZAW3z7S"
     }
   }
 }
