@@ -39,7 +39,6 @@ helmCharts:
         protocol: TCP
         tls:
           enabled: true
-          options: ""
           certResolver: "le"
           domains:
             - main: codegameeat.com
@@ -52,7 +51,7 @@ helmCharts:
           - '--certificatesresolvers.le.acme.dnschallenge=true'
           - '--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare'
     persistence:
-          enabled: false
+          enabled: true
           name: traefik-pvc
           accessMode: ReadWriteOnce
           size: 128Mi
