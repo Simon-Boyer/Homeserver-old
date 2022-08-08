@@ -7,3 +7,4 @@ resources:
   - project.yaml
   - applications.yaml
   - kustomize-options.yaml
+  - ingress.yaml
