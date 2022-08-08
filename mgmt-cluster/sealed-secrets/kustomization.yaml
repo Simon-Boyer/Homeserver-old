@@ -4,9 +4,7 @@ kind: Kustomization
 helmCharts:
 - name: sealed-secrets
   includeCRDs: true
-  valuesInline:
-    persistence:
-      enabled: true
+  namespace: kube-system
   releaseName: sealed-secrets
   version: 1.0.11
   repo: https://charts.bitnami.com/bitnami
