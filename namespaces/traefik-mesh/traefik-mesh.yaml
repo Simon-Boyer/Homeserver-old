@@ -17,55 +17,6 @@ spec:
     targetRevision: 4.0.2
     helm:
       releaseName: traefik-mesh
-      values: |
-        limits:
-          http: 10
-          tcp: 25
-          udp: 25
-
-        controller:
-          image:
-            name: traefik/mesh
-          logLevel: error
-
-          resources:
-            limit:
-              mem: 100Mi
-              cpu: 200m
-            request:
-              mem: 50Mi
-              cpu: 100m
-
-          # Added so we can launch on nodes with restrictions.
-          nodeSelector: {}
-          tolerations: []
-          affinity: {}
-
-        proxy:
-          image:
-            name: traefik
-
-          resources:
-            limit:
-              mem: 100Mi
-              cpu: 200m
-            request:
-              mem: 50Mi
-              cpu: 100m
-
-          # Added so we can launch on nodes with restrictions.
-          nodeSelector: {}
-          tolerations: []
-        tracing:
-          deploy: false
-          jaeger:
-            enabled: true
-            localAgentHostPort: "tempo.observability.svc.cluster.local:6831"
-        metrics:
-          deploy: true
-          prometheus:
-            # whether to expose Prometheus metrics
-            enabled: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: traefik-mesh

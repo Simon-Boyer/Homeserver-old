@@ -242,15 +242,15 @@ spec:
           # influxdb:
           #   address: localhost:8089
           #   protocol: udp
-          prometheus:
-            entryPoint: metrics
+          # prometheus:
+          #  entryPoint: metrics
           #  addRoutersLabels: true
           # statsd:
           #   address: localhost:8125
 
         tracing:
           jeager:
-            enabled: true
+            enabled: false
           # datadog:
           #   localAgentHostPort: 127.0.0.1:8126
           #   debug: false
