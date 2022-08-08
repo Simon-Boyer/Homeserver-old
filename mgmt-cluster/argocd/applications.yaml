@@ -44,7 +44,7 @@ spec:
   source:
     repoURL: 'https://github.com/Simon-Boyer/homeserver'
     targetRevision: japan-cluster
-    path: namespaces/sealed-secrets
+    path: mgmt-cluster/sealed-secrets
   syncPolicy:
     automated:
       selfHeal: true
