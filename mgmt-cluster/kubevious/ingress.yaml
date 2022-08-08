@@ -9,7 +9,7 @@ spec:
     - kind: Rule
       match: Host(`kube.codegameeat.com`)
       services:
-        - name: kubevious-ui
+        - name: kubevious-ui-clusterip
           port: 80
   tls:
     certResolver: le
