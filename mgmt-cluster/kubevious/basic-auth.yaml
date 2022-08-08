@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
-  name: kubeviousbasicauth
+  name: basicauth
 spec:
   basicAuth:
     secret: basic-auth-secret
