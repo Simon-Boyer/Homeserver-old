@@ -6,6 +6,7 @@ namespace: nextcloud
 resources:
   - namespace.yaml
   - simon-nextcloud-secret.json
+  - ingress.yaml
 
 helmCharts:
 - name: nextcloud
