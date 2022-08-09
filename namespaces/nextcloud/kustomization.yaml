@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: nextcloud
 
 resources:
-  - namespaces.yaml
+  - namespace.yaml
   - simon-nextcloud-secret.json
 
 helmCharts:
