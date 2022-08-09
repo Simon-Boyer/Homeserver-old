@@ -8,7 +8,7 @@ resources:
   - simon-nextcloud-secret.json
 
 helmCharts:
-- name: nextcloud/nextcloud
+- name: nextcloud
   includeCRDs: false
   valuesInline:
     image:
@@ -32,4 +32,4 @@ helmCharts:
       enabled: true
   releaseName: nextcloud
   version: 3.0.3
-  repo: https://nextcloud.github.io/helm/
+  repo: https://nextcloud.github.io/helm
