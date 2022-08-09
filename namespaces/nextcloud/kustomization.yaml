@@ -27,8 +27,6 @@ helmCharts:
         passwordKey: password
     nginx:
       enabled: true
-    redis:
-      enabled: true
     metrics:
       enabled: true
   releaseName: nextcloud
