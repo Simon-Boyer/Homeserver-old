@@ -29,6 +29,8 @@ helmCharts:
       enabled: true
     metrics:
       enabled: true
+    phpClientHttpsFix:
+      enabled: true
   releaseName: nextcloud
   version: 3.0.3
   repo: https://nextcloud.github.io/helm
