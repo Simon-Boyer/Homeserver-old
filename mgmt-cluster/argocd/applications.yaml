@@ -101,23 +101,23 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kubevela
-spec:
-  project: default
-  destination:
-    namespace: kubevela
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: 'https://github.com/Simon-Boyer/homeserver'
-    targetRevision: japan-cluster
-    path: mgmt-cluster/kubevela
-  syncPolicy:
-    automated:
-      selfHeal: true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: kubevela
+# spec:
+#   project: default
+#   destination:
+#     namespace: kubevela
+#     server: https://kubernetes.default.svc
+#   source:
+#     repoURL: 'https://github.com/Simon-Boyer/homeserver'
+#     targetRevision: japan-cluster
+#     path: mgmt-cluster/kubevela
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
