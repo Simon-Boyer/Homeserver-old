@@ -147,7 +147,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: 'https://github.com/Simon-Boyer/simons-travel-blog'
-    targetRevision: japan-cluster
+    targetRevision: main
     path: oam.yaml
   syncPolicy:
     automated:
