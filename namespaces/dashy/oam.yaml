@@ -1,0 +1,96 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: dashy
+  namespace: dashy
+spec:
+  components:
+    - name: dashy-server
+      type: webservice
+      properties:
+        image: lissy93/dashy:2.0.9
+        ports:
+          - port: 80
+            expose: true
+      traits:
+        - type: gateway
+          properties:
+            domain: codegameeat.com
+            http:
+              "/": 80
+            class: traefik
+        - type: storage
+          properties:
+            config: |
+            pageInfo:
+              title: Simon's Homeserver
+              description: Welcome to my homeserver and its services!
+            appConfig:
+              theme: dashy-docs
+              language: en
+              disableConfiguration: true
+            sections:
+              - name: Coding
+                icon: fas fa-rocket
+                items:
+                  - title: Homeserver Code
+                    description: Source Code, Issues and Pull Requests
+                    url: https://github.com/simon-boyer/homeserver
+                    icon: favicon
+                    target: newtab
+                    id: 1_1481_github
+                  - title: Gitea
+                    description: Source Code, Issues and Pull Requests
+                    url: https://gitea.codegameeat.com:9443
+                    icon: https://gitea.io/images/gitea.png
+                    target: newtab
+                    statusCheckUrl: https://gitea.codegameeat.com:9443
+                    statusCheck: true
+                    id: 1_1481_gitea
+                  - title: Hedgedoc
+                    description: Markdown live editor with collaboration
+                    url: https://md.codegameeat.com:9443
+                    icon: https://framalibre.org/sites/default/files/leslogos/HedgeDoc-Logo%201.png
+                    target: newtab
+                    statusCheckUrl: https://md.codegameeat.com:9443
+                    statusCheck: true
+                    id: 1_1481_hedgedoc
+              - name: Productivity
+                icon: fad fa-rocket
+                items:
+                  - title: Nextcloud
+                    description: Files on the cloud
+                    url: https://cloud.codegameeat.com
+                    icon: favicon
+                    target: newtab
+                    id: 1_1481_nextcloud
+                    statusCheck: true
+                    statusCheckUrl: https://cloud.codegameeat.com
+                  - title: Excalidraw
+                    description: Whiteboard
+                    url: https://draw.codegameeat.com
+                    icon: favicon
+                    target: newtab
+                    id: 1_1481_excalidraw
+                    statusCheck: true
+                    statusCheckUrl: https://draw.codegameat.com
+                  - title: Paperless NG
+                    description: Notes taking
+                    url: https://notes.codegameeat.com
+                    icon: favicon
+                    target: newtab
+                    id: 1_1481_paperless
+                    statusCheck: true
+                    statusCheckUrl: https://notes.codegameeat.com
+
+              - name: Medias
+                icon: fad fa-comments
+                items:
+                  - title: Blog
+                    description: My Blog
+                    url: https://blog.codegameeat.com
+                    icon: favicon
+                    target: newtab
+                    id: 1_1481_blog
+                    statusCheck: true
+                    statusCheckUrl: https://blog.codegameeat.com

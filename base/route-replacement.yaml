@@ -1,8 +1,0 @@
-source:
-  kind: Deployment
-  fieldPath: metadata.annotations.route
-targets:
-- select:
-    kind: IngressRoute
-  fieldPaths: 
-  - spec.routes.[kind=Rule].match

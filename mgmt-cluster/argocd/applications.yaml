@@ -22,7 +22,7 @@ metadata:
 spec:
   project: default
   destination:
-    namespace: public
+    namespace: dashy
     server: https://kubernetes.default.svc
   source:
     repoURL: 'https://github.com/Simon-Boyer/homeserver'
@@ -49,23 +49,23 @@ spec:
     automated:
       selfHeal: true
 
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: traefik-mesh-source
-# spec:
-#   project: default
-#   destination:
-#     namespace: public
-#     server: https://kubernetes.default.svc
-#   source:
-#     repoURL: 'https://github.com/Simon-Boyer/homeserver'
-#     targetRevision: japan-cluster
-#     path: namespaces/traefik-mesh
-#   syncPolicy:
-#     automated:
-#       selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik-mesh
+spec:
+  project: default
+  destination:
+    namespace: traefik
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/Simon-Boyer/homeserver'
+    targetRevision: japan-cluster
+    path: namespaces/traefik-mesh
+  syncPolicy:
+    automated:
+      selfHeal: true
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -105,6 +105,23 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  name: kubevela
+spec:
+  project: default
+  destination:
+    namespace: kubevela
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/Simon-Boyer/homeserver'
+    targetRevision: japan-cluster
+    path: mgmt-cluster/kubevela
+  syncPolicy:
+    automated:
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
   name: nextcloud
 spec:
   project: default
@@ -118,3 +135,37 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hugo
+spec:
+  project: default
+  destination:
+    namespace: hugo
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/Simon-Boyer/simons-travel-blog'
+    targetRevision: japan-cluster
+    path: oam.yaml
+  syncPolicy:
+    automated:
+      selfHeal: true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: paperlessng
+# spec:
+#   project: default
+#   destination:
+#     namespace: paperlessng
+#     server: https://kubernetes.default.svc
+#   source:
+#     repoURL: 'https://github.com/Simon-Boyer/homeserver'
+#     targetRevision: japan-cluster
+#     path: namespaces/paperlessng
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
