@@ -148,7 +148,7 @@ spec:
   source:
     repoURL: 'https://github.com/Simon-Boyer/simons-travel-blog'
     targetRevision: main
-    path: oam.yaml
+    path: .
   syncPolicy:
     automated:
       selfHeal: true
