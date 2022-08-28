@@ -9,3 +9,6 @@ helmCharts:
   releaseName: vela-core
   version: 1.4.8
   repo: https://charts.kubevela.net/core
+
+ressources:
+- namespace.yaml
