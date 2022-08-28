@@ -10,5 +10,5 @@ helmCharts:
   version: 1.4.8
   repo: https://charts.kubevela.net/core
 
-ressources:
+resources:
 - namespace.yaml
