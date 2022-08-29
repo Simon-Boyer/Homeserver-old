@@ -136,22 +136,22 @@ spec:
     automated:
       selfHeal: true
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: hugo
-spec:
-  project: default
-  destination:
-    namespace: hugo
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: 'https://github.com/Simon-Boyer/simons-travel-blog'
-    targetRevision: main
-    path: .
-  syncPolicy:
-    automated:
-      selfHeal: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: hugo
+# spec:
+#   project: default
+#   destination:
+#     namespace: hugo
+#     server: https://kubernetes.default.svc
+#   source:
+#     repoURL: 'https://github.com/Simon-Boyer/simons-travel-blog'
+#     targetRevision: main
+#     path: .
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
 # ---
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
