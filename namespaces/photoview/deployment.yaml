@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photoview
+spec:
+  selector:
+    matchLabels:
+      app: photoview
+  template:
+    metadata:
+      labels:
+        app: photoview
+    spec:
+      containers:
+      - name: photoview
+        image: viktorstrate/photoview:2
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: "/photos"
+            name: nextcloud
+            readOnly: true
+            subPath: simon/files/Photos
+        env:
+          - name: PHOTOVIEW_DATABASE_DRIVER
+            value: mysql
+          - name: PHOTOVIEW_MYSQL_URL
+            value: photoview:photosecret@tcp(localhost)/photoview
+          - name: PHOTOVIEW_LISTEN_IP
+            value: photoview
+          - name: PHOTOVIEW_LISTEN_PORT
+            value: '80'
+          - name: PHOTOVIEW_MEDIA_CACHE
+            value: /app/cache
+      - name: photoview-db
+        image: mariadb:10.5
+        env:
+          - name: MYSQL_DATABASE
+            value: photoview
+          - name: MYSQL_USER
+            value: photoview
+          - name: MYSQL_RANDOM_ROOT_PASSWORD
+            value: '1'
+          - name: MYSQL_PASSWORD
+            value: photosecret
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "500m"
+      volumes:
+      - name: nextcloud
+        persistentVolumeClaim:
+          claimName: nextcloud-nextcloud
+          readOnly: true
