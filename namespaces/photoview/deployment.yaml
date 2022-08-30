@@ -16,8 +16,8 @@ spec:
         image: viktorstrate/photoview:2
         resources:
           limits:
-            memory: "200Mi"
-            cpu: "500m"
+            memory: "1Gi"
+            cpu: "1000m"
         ports:
         - containerPort: 80
         volumeMounts:
@@ -49,8 +49,8 @@ spec:
             value: photosecret
         resources:
           limits:
-            memory: "200Mi"
-            cpu: "500m"
+            memory: "600Mi"
+            cpu: "1000m"
       volumes:
       - name: nextcloud
         persistentVolumeClaim:
