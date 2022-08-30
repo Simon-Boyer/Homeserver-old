@@ -56,3 +56,6 @@ spec:
         persistentVolumeClaim:
           claimName: nextcloud-nextcloud
           readOnly: true
+      - name: db-storage
+        hostPath:
+          path: /var/data/photoview-db
