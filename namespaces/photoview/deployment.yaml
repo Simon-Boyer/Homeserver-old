@@ -24,7 +24,7 @@ spec:
           - mountPath: "/photos"
             name: nextcloud
             readOnly: true
-            subPath: simon/files/Photos
+            subPath: data/simon/files/Photos
         env:
           - name: PHOTOVIEW_DATABASE_DRIVER
             value: mysql
