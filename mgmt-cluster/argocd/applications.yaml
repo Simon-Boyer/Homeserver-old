@@ -136,6 +136,23 @@ spec:
     automated:
       selfHeal: true
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: photoview
+spec:
+  project: default
+  destination:
+    namespace: nextcloud
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: 'https://github.com/Simon-Boyer/homeserver'
+    targetRevision: japan-cluster
+    path: namespaces/photoview
+  syncPolicy:
+    automated:
+      selfHeal: true
+---
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
