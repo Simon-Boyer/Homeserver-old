@@ -17,7 +17,7 @@ helmCharts:
     persistence:
       enabled: true
       storageClass: linode-block-storage-retain
-      size: 40Gi
+      size: 50Gi
     nextcloud:
       host: cloud.codegameeat.com
       existingSecret:
