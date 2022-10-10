@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: imageproxy-ingress
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`image.codegameeat.com`)
+      services:
+        - name: imageproxy
+          port: 80
+  tls:
+    certResolver: le

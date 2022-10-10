@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: imageproxy
+spec:
+  selector:
+    app: imageproxy
+  ports:
+  - port: 80
+    targetPort: 8080

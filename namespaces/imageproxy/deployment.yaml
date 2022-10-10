@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imageproxy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: imageproxy
+  template:
+    metadata:
+      labels:
+        app: imageproxy
+    spec:
+      containers:
+      - name: imageproxy
+        image: darthsim/imgproxy
+        env:
+          - name: IMGPROXY_ALLOWED_SOURCES
+            value: https://cloud.codegameeat.com/
+        resources:
+          limits:
+            memory: "600Mi"
+            cpu: "400m"
+        ports:
+        - containerPort: 8080
