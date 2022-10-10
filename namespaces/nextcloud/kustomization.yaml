@@ -13,6 +13,7 @@ helmCharts:
   includeCRDs: false
   valuesInline:
     image:
+      repository: ghcr.io/simon-boyer/nextcloud-container
       flavor: fpm-alpine
     persistence:
       enabled: true
